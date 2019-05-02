@@ -56,11 +56,15 @@ sendBtn.addEventListener('click', () => {
 msgBox.addEventListener('keydown', (e) => {
   if (e.code === 'Enter' && msgBox.value.trim() !== '') {
     websocket.send(JSON.stringify({ 'type': 'message', 'message': msgBox.value, 'room_id': roomId }))
-    addMessage(msgBox.value, 'message')
-    addMessage('test', 'reply', name)
-    addToList('test')
+    // addMessage(msgBox.value, 'message')
+    // addMessage('test', 'reply', name)
+    // addToList('test')
   }
 })
+
+function updateScroll () {
+  screen.scrollTop = screen.scrollHeight
+}
 
 function addMessage (message, msgClass, sender = name) {
   let msg = document.createElement('div')
@@ -81,6 +85,7 @@ function addMessage (message, msgClass, sender = name) {
   msg.appendChild(content)
   msg.appendChild(time)
   screen.appendChild(msg)
+  setInterval(updateScroll(), 3000)
   msgBox.value = ''
   msgBox.focus()
 }
